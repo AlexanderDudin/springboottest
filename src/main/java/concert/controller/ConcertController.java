@@ -73,7 +73,7 @@ public class ConcertController {
 
     @RequestMapping(value = "/mybooking/cancel", method = {RequestMethod.GET, RequestMethod.DELETE})
     public CancellationResponse cancelReservation(@RequestParam final int bookingCode) {
-        CancellationResponse response = new CancellationResponse();
+        final CancellationResponse response = new CancellationResponse();
         String errorMessage = null;
         boolean isReservationCanceled = false;
         isReservationCanceled = onlineConcertDao.deleteBooking(bookingCode);
