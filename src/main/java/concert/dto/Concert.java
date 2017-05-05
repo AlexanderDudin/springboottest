@@ -1,5 +1,7 @@
 package concert.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 /**
@@ -25,6 +27,7 @@ public class Concert {
         return location;
     }
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     public LocalDate getSpendingTime() {
         return spendingTime;
     }
