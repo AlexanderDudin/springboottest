@@ -4,9 +4,7 @@ package concert.dto;
  * Created by dudin on 03/05/17.
  */
 public class ConcertInfo {
-    public String getCustomerData() {
-        return customerData;
-    }
+
 
     public int getConcertId() {
         return concertId;
@@ -16,9 +14,6 @@ public class ConcertInfo {
         return countTickets;
     }
 
-    public void setCustomerData(String customerData) {
-        this.customerData = customerData;
-    }
 
     public void setConcertId(int concertId) {
         this.concertId = concertId;
@@ -28,7 +23,24 @@ public class ConcertInfo {
         this.countTickets = countTickets;
     }
 
-    private String customerData;
+    public String getCustomerFname() {
+        return customerFname;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerFname(final String customerFname) {
+        this.customerFname = customerFname;
+    }
+
+    public void setCustomerPhone(final String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    private String customerFname;
+    private String customerPhone;
     private int concertId;
     private int countTickets;
 }

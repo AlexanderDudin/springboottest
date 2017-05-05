@@ -36,15 +36,17 @@ public class ConcertController {
         ReservationResponse response = new ReservationResponse();
         String errorMessage = null;
         int concertId = input.getConcertId();
-        boolean flag = false;
+
         //String reservationCode = null;
         if (concertId > 0) {
-            onlineConcertDao.addReservation(new Reservation(input.getCustomerData(), input.getConcertId(), input.getCountTickets()));
-            flag = true;
+            if (onlineConcertDao.amountAvailableTickets(concertId) >= input.getCountTickets()) {
+                onlineConcertDao.addReservation(new Reservation(input.getCustomerFname(), input.getCustomerPhone(), input.getConcertId(), input.getCountTickets()));
 
-        }
+            } else {
+                errorMessage = String.format("%s", "No tickets available");
 
-        if (flag == false) {
+            }
+        } else {
             errorMessage = String.format("%s", "Wrong id");
         }
         response.setReservationCode(concertId);

@@ -8,10 +8,6 @@ import java.time.LocalDate;
 public class ReservationInfo {
 
 
-    public String getCustomerData() {
-        return customerData;
-    }
-
     public String getPerformer() {
         return performer;
     }
@@ -28,8 +24,12 @@ public class ReservationInfo {
         return countTickets;
     }
 
-    public void setCustomerData(String customerData) {
-        this.customerData = customerData;
+    public String getCustomerFname() {
+        return customerFname;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
     }
 
     public void setPerformer(String performer) {
@@ -48,17 +48,25 @@ public class ReservationInfo {
         this.countTickets = countTickets;
     }
 
-    public ReservationInfo(String customerData, String performer, String location, LocalDate spendingTime, int countTickets) {
+    public void setCustomerFname(final String customerFname) {
+        this.customerFname = customerFname;
+    }
 
-        this.customerData = customerData;
+    public void setCustomerPhone(final String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
+    public ReservationInfo(final String customerFname, final String customerPhone, final String performer, final String location, final LocalDate spendingTime, final int countTickets) {
+        this.customerFname = customerFname;
+        this.customerPhone = customerPhone;
         this.performer = performer;
         this.location = location;
         this.spendingTime = spendingTime;
         this.countTickets = countTickets;
     }
 
-
-    private String customerData;
+    private String customerFname;
+    private String customerPhone;
     private String performer;
     private String location;
     private LocalDate spendingTime;

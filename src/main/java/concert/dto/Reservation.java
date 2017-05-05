@@ -8,9 +8,7 @@ public class Reservation {
         return reservationId;
     }
 
-    public String getCustomerData() {
-        return customerData;
-    }
+
 
     public int getConcertId() {
         return concertId;
@@ -24,9 +22,6 @@ public class Reservation {
         this.reservationId = reservationId;
     }
 
-    public void setCustomerData(String customerData) {
-        this.customerData = customerData;
-    }
 
     public void setConcertId(int concertId) {
         this.concertId = concertId;
@@ -36,18 +31,37 @@ public class Reservation {
         this.countTickets = countTickets;
     }
 
+
+    public String getCustomerFname() {
+        return customerFname;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerFname(final String customerFname) {
+        this.customerFname = customerFname;
+    }
+
+    public void setCustomerPhone(final String customerPhone) {
+        this.customerPhone = customerPhone;
+    }
+
     private int reservationId;
-    private String customerData;
+    private String customerFname;
+    private String customerPhone;
     private int concertId;
     private int countTickets;
+
 
     public Reservation() {
     }
 
-    public Reservation(String customerData, int concertId, int countTickets) {
-        this.reservationId = reservationId;
+    public Reservation(String customerFname, String customerPhone, int concertId, int countTickets) {
+        this.customerFname = customerFname;
+        this.customerPhone = customerPhone;
         this.concertId = concertId;
-        this.customerData = customerData;
         this.countTickets = countTickets;
     }
 

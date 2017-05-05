@@ -42,13 +42,14 @@ public class OnlineConcertDao {
     }
 
     public void addReservation(Reservation reservation) {
-        String insertQuery = "INSERT INTO reservation(customer_data, concert_id, count_tickets) VALUES(?, ?, ?) ;";
+        String insertQuery = "INSERT INTO reservation(customer_fullname, customer_phone, concert_id, count_tickets) VALUES(?, ?, ?, ?) ;";
         jdbcTemplate.update(
                 connection -> {
                     PreparedStatement ps = connection.prepareStatement(insertQuery);
-                    ps.setString(1, reservation.getCustomerData());
-                    ps.setInt(2, reservation.getConcertId());
-                    ps.setInt(3, reservation.getCountTickets());
+                    ps.setString(1, reservation.getCustomerFname());
+                    ps.setString(2, reservation.getCustomerPhone());
+                    ps.setInt(3, reservation.getConcertId());
+                    ps.setInt(4, reservation.getCountTickets());
                     return ps;
                 });
 
@@ -63,12 +64,18 @@ public class OnlineConcertDao {
         ReservationInfo info = jdbcTemplate.queryForObject(selectQuery, new RowMapper<ReservationInfo>() {
             @Override
             public ReservationInfo mapRow(ResultSet rs, int i) throws SQLException {
-                return new ReservationInfo(rs.getString("customer_data"), rs.getString("performer"), rs.getString("location"), rs.getDate("spending_time").toLocalDate(), rs.getInt("count_tickets"));
+                return new ReservationInfo(rs.getString("customer_fullname"), rs.getString("customer_phone"), rs.getString("performer"), rs.getString("location"), rs.getDate("spending_time").toLocalDate(), rs.getInt("count_tickets"));
             }
         }, reservation_id);
         return info;
     }
 
+    public int amountAvailableTickets(int concertId) {
+        String query = "SELECT amount_ticket - sum(count_tickets) FROM reservation JOIN concerts ON reservation.concert_id = concerts.concert_id WHERE concerts.concert_id  = ? ;";
+        int result = jdbcTemplate.queryForObject(query,
+                new Object[]{concertId}, Integer.class);
+        return result;
+    }
 
     public boolean deleteBooking(int bookingCode) {
         String deleteQuery = "DELETE FROM reservation WHERE reservation_id LIKE ? ;";
